@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
-import { ObjectType, Field, ID, Root } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 /**
  * Fields that we can now query must bear a @Field decorator
  * @Field is what is read by TypeGraphQL
@@ -38,8 +38,8 @@ export class User extends BaseEntity {
 
   //Whenever user is returned after registration, we shall return F and L name
   @Field()
-  name(@Root() parent: User): string {
-    return `${parent.firstName} ${parent.lastName}`;
+  name(): string {
+    return `${this.firstName} ${this.lastName}`;
   }
 
   @Field()
