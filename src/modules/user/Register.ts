@@ -1,13 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  FieldResolver,
-  Root,
-  ArgsType,
-  Field,
-  Args
-} from "type-graphql";
+import { Resolver, Query, Mutation, ArgsType, Field, Args } from "type-graphql";
 import bcrypt from "bcrypt";
 import { User } from "../../entity/User";
 
@@ -26,17 +17,11 @@ class registerArgs {
   password: string;
 }
 
-@Resolver(User) //User - optional param but because of our @FieldResolver(),
+@Resolver()
 export class RegisterResolver {
   @Query(() => String)
   hello() {
     return "Hello World";
-  }
-
-  //Cater for name - resolved whenever User is returned anywhere
-  @FieldResolver()
-  name(@Root() parent: User) {
-    return `${parent.firstName} ${parent.lastName}`;
   }
 
   @Mutation(() => User)
