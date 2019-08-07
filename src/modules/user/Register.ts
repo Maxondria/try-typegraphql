@@ -2,12 +2,29 @@ import {
   Resolver,
   Query,
   Mutation,
-  Arg,
   FieldResolver,
-  Root
+  Root,
+  ArgsType,
+  Field,
+  Args
 } from "type-graphql";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { User } from "../../entity/User";
+
+@ArgsType()
+class registerArgs {
+  @Field()
+  firstName: string;
+
+  @Field()
+  lastName: string;
+
+  @Field()
+  email: string;
+
+  @Field()
+  password: string;
+}
 
 @Resolver(User) //User - optional param but because of our @FieldResolver(),
 export class RegisterResolver {
@@ -23,12 +40,13 @@ export class RegisterResolver {
   }
 
   @Mutation(() => User)
-  async register(
-    @Arg("firstName") firstName: string,
-    @Arg("lastName") lastName: string,
-    @Arg("email") email: string,
-    @Arg("password") password: string
-  ): Promise<User> {
+  async register(@Args()
+  {
+    firstName,
+    lastName,
+    email,
+    password
+  }: registerArgs): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await User.create({
       firstName,
