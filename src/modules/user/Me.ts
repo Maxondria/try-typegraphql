@@ -4,11 +4,13 @@ import { AppContext } from "../../types/app-context";
 
 @Resolver()
 export class MeResolver {
-  @Query(() => String, { nullable: true })
-  async me(@Ctx() context: AppContext) {
+  @Query(() => User, { nullable: true })
+  async me(@Ctx() context: AppContext): Promise<User | null> {
     const id = context.req.session!.userId;
     if (id) {
-      return await User.findOne(id);
+      const user = await User.findOne(id);
+      if (!user) return null;
+      else return user;
     }
     return null;
   }
