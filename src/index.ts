@@ -10,7 +10,7 @@ import { redis } from "./redis";
 
 import { RegisterResolver } from "./modules/user/Register";
 import { LoginResolver } from "./modules/user/Login";
-import { MeResolver } from './modules/user/Me';
+import { MeResolver } from "./modules/user/Me";
 
 const main = async function() {
   await createConnection();
