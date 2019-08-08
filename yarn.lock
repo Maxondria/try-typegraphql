@@ -239,6 +239,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.18.tgz#758ec2bf26339d3cc83da22676b64777d0c2befe"
   integrity sha512-sMHdXLccscaxI+Hlzz58yLQue3lQyXP+6aQniDRi5oju3n0123kcjhicVGF20WF7cHiwJ2vxMbXc4skOclosoA==
 
+"@types/nodemailer@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.2.1.tgz#8f089bf0ef826f04b9d8dd8750233b04978cb675"
+  integrity sha512-6f46rxxaFwyOW39psPoQiM7jHjL7apDRNT5WPHIuv+TZFv+7sBGSI9J7blIC3/NWff4O9/VSzgoQtO6aPLUdvQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/range-parser@*":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
@@ -280,6 +287,13 @@
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
+
+"@types/uuid@^3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.5.tgz#d4dc10785b497a1474eae0ba7f0cb09c0ddfd6eb"
+  integrity sha512-MNL15wC3EKyw1VLF+RoVO4hJJdk9t/Hlv3rt1OL65Qvuadm4BYo6g9ZJQqoq7X8NBFSsQXgAujWciovh2lpVjA==
+  dependencies:
+    "@types/node" "*"
 
 "@types/ws@^6.0.0":
   version "6.0.2"
@@ -1666,6 +1680,11 @@ node-pre-gyp@0.12.0:
     semver "^5.3.0"
     tar "^4"
 
+nodemailer@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.3.0.tgz#a89b0c62d3937bdcdeecbf55687bd7911b627e12"
+  integrity sha512-TEHBNBPHv7Ie/0o3HXnb7xrPSSQmH1dXwQKRaMKDBGt/ZN54lvDVujP6hKkO/vjkIYL9rK8kHSG11+G42Nhxuw==
+
 nopt@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-4.0.1.tgz#d0d4685afd5415193c8c7505602d0d17cd64474d"
@@ -2556,7 +2575,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.1.0:
+uuid@^3.1.0, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
