@@ -11,14 +11,14 @@ export class ChangePasswordResolver {
   @Mutation(() => User, { nullable: true })
   async changePassword(
     @Arg("data")
-    { newpassword, token }: ChangePasswordInput,
+    { password, token }: ChangePasswordInput,
     @Ctx() context: AppContext
   ): Promise<User | null> {
     const userid = await redis.get(token);
     if (!userid) return null;
     const user = await User.findOne(Number(userid));
     if (!user) return null;
-    const hashedPassword = await bcrypt.hash(newpassword, 12);
+    const hashedPassword = await bcrypt.hash(password, 12);
     await User.update({ id: Number(userid) }, { password: hashedPassword });
     redis.del(token);
     //Log the user in
