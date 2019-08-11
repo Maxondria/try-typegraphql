@@ -35,6 +35,7 @@ describe("User Registration", () => {
 
   afterEach("restore sandbox", () => {
     sandbox.restore();
+    sinon.restore();
   });
 
   it("User Can Register", async () => {
