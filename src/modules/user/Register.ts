@@ -6,8 +6,8 @@ import { RegisterInput } from "./register/RegisterInput";
 import { isAuth } from "../middleware/isAuthenticated";
 import { Logger } from "../middleware/Logger";
 
-import { sendEmail } from "../utils/sendMail";
-import { UrlGenerator } from "../utils/confirmationUrl";
+// import { sendEmail } from "../utils/sendMail";
+// import { UrlGenerator } from "../utils/confirmationUrl";
 
 @Resolver()
 export class RegisterResolver {
@@ -33,7 +33,7 @@ export class RegisterResolver {
       password: hashedPassword
     }).save();
 
-    await sendEmail(email, await UrlGenerator(user.id));
+    //await sendEmail(email, await UrlGenerator(user.id));
 
     return user;
   }

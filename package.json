@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node_modules/.bin/ts-node-dev --respawn ./src/index.ts",
     "db:setup": "node_modules/.bin/ts-node ./src/test-utils/setup.ts",
-    "test": "node_modules/.bin/mocha -r node_modules/.bin/ts-node/register ./src/**/*.spec.ts"
+    "test": "node_modules/.bin/mocha -r ts-node/register ./src/**/*.spec.ts"
   },
   "dependencies": {
     "apollo-server-express": "^2.8.1",
