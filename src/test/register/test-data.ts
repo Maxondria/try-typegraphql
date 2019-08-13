@@ -1,9 +1,7 @@
 export const registerMutation = `
-    mutation Register(
-     $data: RegisterInput!
-      ) { 
+    mutation Register($data: RegisterInput!) {
       register(
-       data: $data
+        data: $data
       ) {
         id
         firstName
@@ -13,7 +11,6 @@ export const registerMutation = `
       }
 }
 `;
-
 export const correctArgs = {
   firstName: "bob",
   lastName: "bob2",
@@ -29,13 +26,10 @@ export const invalidArgs = {
 };
 
 export const correctRegistrationResponse = {
-  data: {
-    register: {
-      id: "2",
-      name: "Tayebwa Maxon",
-      firstName: "Tayebwa",
-      lastName: "Maxon",
-      email: "max@max44.com"
-    }
-  }
+  id: "1",
+  name: "Bob Maxon",
+  firstName: "bob",
+  lastName: "bob2",
+  email: "bob@bob.com",
+  password: "asdfasdf"
 };

@@ -1,18 +1,17 @@
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
-import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import cors from "cors";
 import { redis } from "./redis";
+import { createSchema } from "./utils/createSchema";
 
 export const main = async function() {
   await createConnection();
-  const schema = await buildSchema({
-    resolvers: [__dirname + "/modules/**/*.ts"]
-  });
+
+  const schema = await createSchema();
 
   const apolloServer = new ApolloServer({
     schema,
@@ -50,4 +49,4 @@ export const main = async function() {
   apolloServer.applyMiddleware({ app });
 
   return { app };
-}
+};
