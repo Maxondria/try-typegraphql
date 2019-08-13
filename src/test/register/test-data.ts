@@ -30,9 +30,11 @@ export const invalidArgs = {
 };
 
 export const correctRegistrationResponse = {
-  id: "1",
-  name: "Bob Maxon",
-  firstName: "bob",
-  lastName: "bob2",
-  email: "bob@bob.com"
+  save: () => ({
+    id: "1",
+    name: "Bob Maxon",
+    firstName: "bob",
+    lastName: "bob2",
+    email: "bob@bob.com"
+  })
 };

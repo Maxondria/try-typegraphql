@@ -1,6 +1,7 @@
 import { gCall } from "../test-utils/gCall";
 import { expect } from "chai";
 import sinon, { SinonSandbox } from "sinon";
+import nodemailer from "nodemailer";
 
 import {
   registerMutation,
@@ -9,8 +10,9 @@ import {
   invalidArgs
 } from "./test-data";
 import { testConn } from "../test-utils/testConn";
-import { RegisterResolver } from "../../modules/user/Register";
+// import { RegisterResolver } from "../../modules/user/Register";
 import { Connection } from "typeorm";
+import { User } from "../../entity/User";
 
 let conn: Connection;
 before(async () => {
@@ -32,9 +34,30 @@ describe("User Registration", () => {
   });
 
   it("User Can Register", async () => {
-    const registrationStub = sandbox.stub();
-    registrationStub.returns(correctRegistrationResponse);
-    sandbox.replace(RegisterResolver.prototype, "register", registrationStub);
+    const registrationStub = sandbox
+      .stub()
+      .returns(correctRegistrationResponse);
+
+    const nodemailerTestAccStub = sandbox
+      .stub()
+      .resolves({ user: "test@test.com", pass: "test" });
+
+    const nodemailerTransStub = sandbox.stub().returns({
+      sendMail: () => {
+        return Promise.resolve({
+          messageId: "Test Message Sent!"
+        });
+      }
+    });
+
+    const nodemailerTestUrlStub = sandbox
+      .stub()
+      .returns("Some Random Test URL");
+
+    sandbox.replace(User, "create", registrationStub);
+    sandbox.replace(nodemailer, "createTransport", nodemailerTransStub);
+    sandbox.replace(nodemailer, "createTestAccount", nodemailerTestAccStub);
+    sandbox.replace(nodemailer, "getTestMessageUrl", nodemailerTestUrlStub);
 
     const response = await gCall({
       source: registerMutation,
@@ -50,7 +73,7 @@ describe("User Registration", () => {
       "lastName",
       "email"
     );
-    expect(response.data!.register.name).eql("Bob Maxon");
+    expect(response.data!.register.name).to.eql("Bob Maxon");
   });
 
   it("Rejects Invalid Arguments", async () => {
