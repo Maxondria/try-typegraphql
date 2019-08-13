@@ -34,7 +34,6 @@ export class RegisterResolver {
     }).save();
 
     await sendEmail(email, await UrlGenerator(user.id));
-
     return user;
   }
 }

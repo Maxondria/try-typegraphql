@@ -12,17 +12,21 @@ export const registerMutation = `
 }
 `;
 export const correctArgs = {
-  firstName: "bob",
-  lastName: "bob2",
-  email: "bob@bob.com",
-  password: "asdfasdf"
+  data: {
+    firstName: "bob",
+    lastName: "bob2",
+    email: "bob@bob.com",
+    password: "asdfasdf"
+  }
 };
 
 export const invalidArgs = {
-  firstName: "",
-  lastName: "bob2",
-  email: "bob@bob",
-  password: "asdfasdf"
+  data: {
+    firstName: "bob",
+    lastName: "bob2",
+    email: "bob@bob",
+    password: "asdfasdf"
+  }
 };
 
 export const correctRegistrationResponse = {
@@ -30,6 +34,5 @@ export const correctRegistrationResponse = {
   name: "Bob Maxon",
   firstName: "bob",
   lastName: "bob2",
-  email: "bob@bob.com",
-  password: "asdfasdf"
+  email: "bob@bob.com"
 };
