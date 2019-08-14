@@ -12,6 +12,7 @@ import {
 import { testConn } from "../test-utils/testConn";
 import { Connection } from "typeorm";
 import { User } from "../../entity/User";
+import { redis } from "../../redis";
 
 let conn: Connection;
 before(async () => {
@@ -37,6 +38,8 @@ describe("#User Registration", () => {
       .stub()
       .returns(correctRegistrationResponse);
 
+    const redisStub = sandbox.stub().resolves();
+
     const nodemailerTestAccStub = sandbox
       .stub()
       .resolves({ user: "test@test.com", pass: "test" });
@@ -54,6 +57,7 @@ describe("#User Registration", () => {
       .returns("Some Random Test URL");
 
     sandbox.replace(User, "create", registrationStub);
+    sandbox.replace(redis, "set", redisStub);
     sandbox.replace(nodemailer, "createTransport", nodemailerTransStub);
     sandbox.replace(nodemailer, "createTestAccount", nodemailerTestAccStub);
     sandbox.replace(nodemailer, "getTestMessageUrl", nodemailerTestUrlStub);
