@@ -21,7 +21,7 @@ after(async () => {
   await conn.close();
 });
 
-describe("User Registration", () => {
+describe("#User Registration", () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {

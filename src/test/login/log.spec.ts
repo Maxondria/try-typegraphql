@@ -13,7 +13,7 @@ import {
 
 import { User } from "../../entity/User";
 
-describe("User Loggin / Sign In", () => {
+describe("#User Loggin", () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {

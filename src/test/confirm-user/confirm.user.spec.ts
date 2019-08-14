@@ -6,7 +6,7 @@ import { confirmUserQuery, CorrectToken, WrongToken } from "./test-data";
 import { redis } from "../../redis";
 import { User } from "../../entity/User";
 
-describe("User Email Confirmation", () => {
+describe("#User Email Confirmation", () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
