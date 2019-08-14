@@ -10,7 +10,6 @@ import {
   invalidArgs
 } from "./test-data";
 import { testConn } from "../test-utils/testConn";
-// import { RegisterResolver } from "../../modules/user/Register";
 import { Connection } from "typeorm";
 import { User } from "../../entity/User";
 
@@ -73,7 +72,7 @@ describe("User Registration", () => {
       "lastName",
       "email"
     );
-    expect(response.data!.register.name).to.eql("Bob Maxon");
+    expect(response.data!.register.name).to.eql("bob bob2");
   });
 
   it("Rejects Invalid Arguments", async () => {

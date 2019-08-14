@@ -2,13 +2,17 @@ import { gCall } from "../test-utils/gCall";
 import { expect } from "chai";
 import sinon, { SinonSandbox } from "sinon";
 
-//import { correctRegistrationResponse } from "../register/test-data";
 import {
-  /*correctArgs*/ invalidArgs,
+  invalidArgs,
   LoginQuery,
-  WrongEmailArgs
+  WrongEmailArgs,
+  WrongPasswordArgs,
+  LoginCorrectResponse,
+  correctArgs
 } from "./test-data";
+
 import { User } from "../../entity/User";
+import { LoginResolver } from '../../modules/user/Login';
 
 describe("User Loggin / Sign In", () => {
   let sandbox: SinonSandbox;
@@ -31,8 +35,8 @@ describe("User Loggin / Sign In", () => {
   });
 
   it("User Can't Login With Non-existent Email", async () => {
-    const LoginStunb = sandbox.stub();
-    LoginStunb.returns(undefined);
+    const LoginStunb = sandbox.stub().returns(undefined);
+
     sandbox.replace(User, "findOne", LoginStunb);
 
     const response = await gCall({
@@ -41,5 +45,56 @@ describe("User Loggin / Sign In", () => {
     });
 
     expect(response.data!.login).to.equal(null);
+  });
+
+  it("User Can't Login With Wrong Password", async () => {
+    const LoginStunb = sandbox.stub().resolves({
+      password: "$2b$12$etMB.V9JrtQYS/EjSES3WOUaKPujRT0TXXIFB6w.Z/vtLmlbx1.l."
+    });
+
+    sandbox.replace(User, "findOne", LoginStunb);
+
+    const response = await gCall({
+      source: LoginQuery,
+      variableValues: WrongPasswordArgs
+    });
+
+    expect(response.data!.login).to.equal(null);
+  });
+
+  it("User Can't Login With Without Confirming Their Email", async () => {
+    const LoginStunb = sandbox.stub().resolves(LoginCorrectResponse);
+
+    sandbox.replace(User, "findOne", LoginStunb);
+
+    const response = await gCall({
+      source: LoginQuery,
+      variableValues: correctArgs
+    });
+
+    expect(response.data!.login).to.equal(null);
+  });
+
+  it("User Can Login", async () => {
+    LoginCorrectResponse.confirmed = true;
+    const LoginStunb = sandbox.stub().resolves(LoginCorrectResponse);
+
+    sandbox.replace(LoginResolver.prototype, "login", LoginStunb);
+
+    const response = await gCall({
+      source: LoginQuery,
+      variableValues: correctArgs
+    });
+
+    expect(response).to.be.an("object");
+    expect(response.data!.login).to.not.be.undefined;
+    expect(response.data!.login).to.have.all.keys(
+      "id",
+      "name",
+      "firstName",
+      "lastName",
+      "email"
+    );
+    expect(response.data!.login.name).to.eql("bob bob2");
   });
 });
