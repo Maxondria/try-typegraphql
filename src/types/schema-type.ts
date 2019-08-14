@@ -5,4 +5,5 @@ export interface Options {
   variableValues?: Maybe<{
     [key: string]: any;
   }>;
+  userId?: number;
 }

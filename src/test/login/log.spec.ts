@@ -12,7 +12,6 @@ import {
 } from "./test-data";
 
 import { User } from "../../entity/User";
-import { LoginResolver } from '../../modules/user/Login';
 
 describe("User Loggin / Sign In", () => {
   let sandbox: SinonSandbox;
@@ -79,11 +78,12 @@ describe("User Loggin / Sign In", () => {
     LoginCorrectResponse.confirmed = true;
     const LoginStunb = sandbox.stub().resolves(LoginCorrectResponse);
 
-    sandbox.replace(LoginResolver.prototype, "login", LoginStunb);
+    sandbox.replace(User, "findOne", LoginStunb);
 
     const response = await gCall({
       source: LoginQuery,
-      variableValues: correctArgs
+      variableValues: correctArgs,
+      userId: 1
     });
 
     expect(response).to.be.an("object");
