@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node_modules/.bin/ts-node-dev --respawn ./src/index.ts",
     "db:setup": "node_modules/.bin/ts-node ./src/test/test-utils/setup.ts",
-    "test": "yarn run db:setup && node_modules/.bin/mocha -r ts-node/register ./src/**/*.spec.ts"
+    "test": "yarn run db:setup && node_modules/.bin/mocha -r ts-node/register ./src/**/*.spec.ts --exit"
   },
   "dependencies": {
     "apollo-server-express": "^2.8.1",
