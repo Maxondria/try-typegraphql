@@ -27,5 +27,5 @@ script:
 #   - codeclimate-test-reporter
 
 # push report to coveralls.io
-# after_success:
-#   - coveralls
+after_success:
+  - yarn run coverage
